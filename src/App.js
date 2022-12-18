@@ -7,41 +7,30 @@ import logo from "./images/logo.svg";
 import plus from "./images/icon-plus.svg";
 import minus from "./images/icon-minus.svg";
 import menu from "./images/icon-menu.svg";
-function Header() {
-  return (
-    <>
-      <div className="container flex justify-between items-center border-b border-slate-400 px-3 lg:py-8 py-5   mx-auto w-full  lg:max-w-7xl ">
-        <div className="flex justify-start items-center gap-4 ">
-          <img className=" lg:invisible" src={menu} alt="" />
-          <img src={logo} alt="" />
-          <nav className=" lg:visible  sm:hidden md:hidden  ">
-            <ul className="flex justify-start text-slate-500   gap-3 ml-5 text-center">
-              <li>Collections</li>
-              <li>Man</li>
-              <li>Weman</li>
-              <li>About</li>
-              <li>Contact </li>
-            </ul>
-          </nav>
-        </div>
+import { FiChevronLeft } from "react-icons/fi";
+import { FiChevronRight } from "react-icons/fi";
+import Header from "./pages/Header";
 
-        <ul className="flex justify-start items-center  gap-4">
-          <li className="text-xl">
-            <HiOutlineShoppingCart className="text-2xl"></HiOutlineShoppingCart>
-          </li>
-          <li>
-            <img className="w-12" src={avatar} alt="" />
-          </li>
-        </ul>
-      </div>
-    </>
-  );
-}
 function App() {
   const [products] = useState(data);
   const [value, setValue] = useState(0);
   const { mainImage } = products[value];
   const [amount, setAmount] = useState(0);
+  const [slideIndex, setSlideIndex] = useState(1);
+  const leftSlide = () => {
+    if (slideIndex !== 1) {
+      setSlideIndex(slideIndex - 1);
+    } else if (slideIndex === 1) {
+      setSlideIndex(products.length);
+    }
+  };
+  const rightSlide = () => {
+    if (slideIndex !== products.length) {
+      setSlideIndex(slideIndex + 1);
+    } else if (slideIndex === products.length) {
+      setSlideIndex(1);
+    }
+  };
   const handleMinus = () => {
     setAmount(amount - 1);
     if (amount <= 0) {
@@ -53,11 +42,32 @@ function App() {
     <>
       <Header></Header>
       <section className="lg:flex  justify-around items-center  max-w-6xl mx-auto  mt-12  sm:w-full  ">
-        <article className=" mx-auto ">
-          <div className="lg:rounded-2xl md:rounded-2xl md:w-full   lg:w-9/12 sm:w-full   mb-8 max-w-2xl">
-            <img className="lg:rounded-xl" src={mainImage} alt="" />
+        <article className=" mx-auto  ">
+          <div className="">
+            {products.map((item, index) => (
+              <doiv
+                key={item.id}
+                className={slideIndex === index + 1 ? "relative" : "hidden"}
+              >
+                {" "}
+                <div className="lg:rounded-2xl md:rounded-2xl md:w-full      lg:w-9/12 sm:w-full   mb-8 max-w-2xl">
+                  <img className="lg:rounded-xl" src={item.mainImage} alt="" />
+                </div>
+                <ul className="lg:hidden">
+                  <li className="p-4 cursor-pointer rounded-full bg-slate-100  absolute   left-4 -translate-y-1/2 top-1/2 shadow ">
+                    <button onClick={leftSlide}>
+                      <FiChevronLeft className="text-xl font-bold text-slate-700"></FiChevronLeft>
+                    </button>
+                  </li>
+                  <li className="p-4 cursor-pointer rounded-full bg-slate-100  absolute  right-4 -translate-y-1/2 top-1/2 shadow ">
+                    <button onClick={rightSlide}>
+                      <FiChevronRight className="text-xl font-bold text-slate-700"></FiChevronRight>
+                    </button>
+                  </li>
+                </ul>
+              </doiv>
+            ))}
           </div>
-
           <ul className=" lg:flex md:flex  justify-start items-center flex-wrap gap-10 visible hidden">
             {products.map((item, index) => (
               <li
