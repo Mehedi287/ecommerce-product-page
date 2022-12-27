@@ -10,6 +10,7 @@ import menu from "./images/icon-menu.svg";
 import { FiChevronLeft } from "react-icons/fi";
 import { FiChevronRight } from "react-icons/fi";
 import Header from "./pages/Header";
+import Cart from "./pages/Cart";
 
 function App() {
   const [products] = useState(data);
@@ -41,6 +42,7 @@ function App() {
   return (
     <>
       <Header></Header>
+      <Cart mainImage={mainImage}></Cart>
       <section className="lg:flex  justify-around items-center  max-w-6xl mx-auto  mt-12  sm:w-full  ">
         <article className=" mx-auto  ">
           <div className="">

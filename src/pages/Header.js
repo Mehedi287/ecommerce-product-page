@@ -29,7 +29,7 @@ const Header = () => {
   return (
     <div>
       {/* sadfsadffffffffffffasdffffffffffff */}
-      <nav class="bg-white px-2 sm:px-4 py-2.5   w-full z-20 top-0 left-0 border-b border-gray-100 dark:border-gray-600 lg:py-8 lg:max-w-7xl mx-auto ">
+      <nav class="bg-white px-2 sm:px-4 py-2.5   w-full z-0 top-0 left-0 border-b border-slate-50 dark:border-gray-600 lg:py-8 lg:max-w-7xl mx-auto ">
         <div class="container flex flex-wrap items-center justify-between mx-auto ">
           <button
             data-collapse-toggle="navbar-sticky"
